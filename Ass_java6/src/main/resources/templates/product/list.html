@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+<meta charset="utf-8">
+<title>LookBook</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/css/bootstrap-icons.css" rel="stylesheet" />
+<style>
+.card {
+	margin-bottom: 20px;
+}
+
+.card:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transform: translateY(-5px);
+}
+
+.btn-hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+	color: #fff !important;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+</style>
+</head>
+<body>
+	<main class="container" style="padding-top: 30px">
+		<h2 class="fs-4 fw-bold">LookBook</h2>
+		 <!-- Sorting -->
+            <div class="mb-3" style="position: relative; left: 825px">
+                <form action="#" method="get">
+                    <div class="form-group">
+                        <label for="sort">Sắp xếp:</label>
+                        <select name="sort" id="sort" class="form-control d-inline-block w-auto">
+                            <option value="name" th:selected="${sort == 'name'}">Tên</option>
+                            <option value="price" th:selected="${sort == 'price'}">Giá</option>
+                        </select>
+                        <select name="direction" id="direction" class="form-control d-inline-block w-auto">
+                            <option value="asc" th:selected="${direction == 'asc'}">Tăng</option>
+                            <option value="desc" th:selected="${direction == 'desc'}">Giảm</option>
+                        </select>
+                        <input type="submit" value="Sort" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+		<div class="row">
+			<!-- Group products in batches of 8 -->
+			<div class="col-md-3" th:each="p : ${items}">
+				<div class="card mb-4">
+					<a th:href="@{|/product/detail/${p.id}|}"> <img
+						th:src="@{/img/{image}(image=${p.image})}" class="card-img-top"
+						alt="Product Image">
+					</a>
+					<div class="card-body">
+						<h5 class="card-title fw-medium" th:utext=${p.name}></h5>
+						<p class="card-text">
+							Price: <span th:text="${p.price}">$</span>
+						</p>
+						<a th:attr="ng-click=@{|cart.add(${p.id})|}" class="btn btn-primary btn-hover">Add
+							to Cart</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+    <ul class="pagination">
+        <li class="page-item" th:classappend="${page.number == 0} ? 'disabled' : ''">
+            <a class="page-link m-1" th:href="@{/product/list(p=${0})}">First</a>
+        </li>
+        <li class="page-item" th:classappend="${page.number == 0} ? 'disabled' : ''">
+            <a class="page-link m-1" th:href="@{/product/list(p=${page.number - 1})}">Previous</a>
+        </li>
+        <li class="page-item" th:classappend="${page.number == page.totalPages - 1} ? 'disabled' : ''">
+            <a class="page-link m-1" th:href="@{/product/list(p=${page.number + 1})}">Next</a>
+        </li>
+        <li class="page-item" th:classappend="${page.number == page.totalPages - 1} ? 'disabled' : ''">
+            <a class="page-link m-1" th:href="@{/product/list(p=${page.totalPages - 1})}">Last</a>
+        </li>
+    </ul>
+</nav>
+
+
+	</main>
+</body>
+</html>

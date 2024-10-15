@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+    <meta charset="utf-8">
+    <title>LookBook</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        .btn-hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            color: #fff !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="fw-bold fs-5 text-center">
+                            <img src="/img/logo.webp" alt="" style="width: 120px; height: 40px;">
+                        </div>
+                        <div class="mt-2 col-10 m-auto">
+                            <p>
+                                <strong><i class="bi bi-house-heart-fill m-2"></i> MARC
+                                    fashion brand - NET VIET PRODUCTION TRADING JOINT STOCK COMPANY</strong>
+                            </p>
+                            <p>
+                                <strong><i class="bi bi-building m-2"></i> Address: Floor
+                                    15.06 Golden King Office Building, No. 15 Nguyen Luong Bang, Tan
+                                    Phu Ward, District 7, City. HCM</strong>
+                            </p>
+                            <p>
+                                <strong><i class="bi bi-shield-lock m-2"></i> Privacy
+                                    Policy</strong>
+                            </p>
+                            <p>
+                                <strong><i class="bi bi-shuffle m-2"></i> Terms and
+                                    conditions</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="fw-bold fs-5 text-center" style="position: relative; right:35px;">About us</div>
+                        <div style="position: relative; left: 90px;">
+                            <p>Introducing MARC</p>
+                            <p>Recruitment</p>
+                            <p>Fashion inspiration</p>
+                            <p>Store list</p>
+                            <p>Franchise</p>
+                            <p>Loyal customers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex flex-column">
+                        <div class="fw-bold fs-5" style="position: relative; left: 60px;">CERTIFICATION AND CONNECTION</div>
+                        <div class="row m-3">
+                            <div class="m-2" style="position: relative; left: 100px;">
+                                <img src="/img/congthuong.png" alt="" style="max-width: 100%;">
+                            </div>
+                            <div class="m-2" style="position: relative; left: 100px;">
+                                <img src="/img/dmca.png" alt="" style="max-width: 100%;">
+                            </div>
+                            <div class="m-2" style="position: relative; left: 85px;">
+                                <img src="/img/faceinsta.jpg" alt="" style="max-width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

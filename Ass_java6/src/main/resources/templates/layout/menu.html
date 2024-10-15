@@ -1,0 +1,144 @@
+<div xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu"> 
+<header class="fixed-top" >
+  <div class="row">
+    <div class="col" style="height: 28px; background-color: black; padding: 5px 10px;">
+            <p class="text-light m-auto text-center " style="margin: 0; font-size: 12px;">30-DAY FREE EXCHANGE</p>
+    </div>
+</div>
+    <nav class="navbar navbar-expand-lg bg- rounded-2 col-11 m-auto text-uppercase " style=" font-weight: 700; background-color: #fff; ">
+        <div class="container-fluid">
+            <div class="d-lg-flex col-lg-2 justify-content-lg-start fs-4">
+                <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarScroll"
+              aria-controls="navbarScroll"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"><i class="bi bi-justify"></i></span>
+            </button>
+            <a th:href="@{/}" class="text-decoration-none"><img src="/img/logo.webp" style="width: 120px;height: 40px;"></a>
+            </div>
+        <div class="collapse navbar-collapse " id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll m-auto">
+              <li class="nav-item">
+                <a class="nav-link active text-dark" aria-current="page" href="#">New in</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active text-dark" href="#">Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active text-dark" href="#">Lookbook</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active text-dark" href="#">occasion/event</a>
+              </li>
+              <li class="nav-item dropdown "><a
+				class="nav-link dropdown-toggle text-dark" href="#"
+				id="navbarDropdownMenuLink" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false"> <span
+					class="glyphicon glyphicon-user"></span>Blog
+			</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"  style="font-size: 14px;">
+					<a class="dropdown-item" href="#">MARC House News</a> <a
+						class="dropdown-item" href="#">Dressing Advice Corner</a>
+					<a class="dropdown-item" href="#">Standard Form With Straight-Leg Pants</a> <a
+						class="dropdown-item" href="#">Combine Luxurious Outfits with a Blazer</a> <a
+						class="dropdown-item" href="#">Gentle, Polite Office Clothes</a>
+						<a class="dropdown-item" href="#">Look More Beautiful With A-Line Skirts</a> <a
+						class="dropdown-item" href="#">Personalized Shirt Coordination</a>
+					<a class="dropdown-item" href="#">Bright Attractive Party Supplies</a> <a
+						class="dropdown-item" href="#">Mix Light, Personality Shirts</a> <a
+						class="dropdown-item" href="#">Mix Jeans Full of Personality</a>
+				</div>
+				</li>
+              <li class="nav-item">
+                <a class="nav-link active text-dark" href="#">Shop</a>
+              </li>
+            </ul>
+          </div>
+          <div class="d-lg-flex col-lg-3 justify-content-lg-end fs-4 ">
+                <a href="#" class="position-relative text-decoration-none text-dark " style="margin-right: 5px;" >
+                    <i class="bi bi-heart m-2"></i>
+                    <span class="badge text-bg-secondary" style="position: absolute;
+                    top: -2px;
+                    right: -5px;
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    background: red;
+                    text-align: center;
+                    line-height: 7px;
+                    border-radius: 100%;
+                    font-weight: 600;
+                    font-size: 10px;
+                    color: #fff;">0</span>
+                </a>
+           
+            
+                <a href="/cart/view"class="position-relative text-decoration-none text-dark" style="margin-right: 5px;">
+                    <i class="bi bi-bag m-2"></i>
+                    <span class="badge text-bg-secondary" id="countTotal" style="position: absolute;
+                    top: -2px;
+                    right: -5px;
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    background: red;
+                    text-align: center;
+                    line-height: 7px;
+                    border-radius: 100%;
+                    font-weight: 600;
+                    font-size: 10px;
+                    color: #fff;">{{cart.count}}</span>
+                </a>
+<!--                 <th:block th:if="${#request.remoteUser}"> -->
+<!--    					 <a th:href="@{/logout}">Sign Out</a>  Đổi URL để khớp với cấu hình logout trong Spring Security -->
+<!--     				<a th:href="@{/order/list}">Your Orders</a> -->
+<!--     				<li th:if="${#request.isUserInRole('ADMIN')}"> -->
+<!--         			<a th:href="@{/admin/home/index}">Administration</a> -->
+<!--     				</li> -->
+<!-- 				</th:block> -->
+<!--               <th:block th:unless="${#request.remoteUser}"> -->
+<!-- 					 <a th:href="@{/security/login/form}"class="position-relative text-decoration-none text-dark" style="margin-right: 10px;"> -->
+<!--                					 <i class="bi bi-person-circle m-2"></i> -->
+<!--            					 </a> -->
+<!-- 				</th:block> -->
+<!--           <ul th:if="${#request.remoteUser}" class="nav navbar-nav navbar-right"> -->
+<!-- 				<li><a href="#">Welcome [[${#request.remoteUser}]]</a></li> -->
+<!-- 			</ul> -->
+          <!-- Sử dụng Thymeleaf để kiểm tra người dùng trong session -->
+<th:block th:if="${#request.remoteUser}">
+    <div class="nav-item dropdown d-inline-flex">
+        <a class="nav-link ibar-title py-0 dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
+            <i class="bi bi-person-circle m-2"></i> 
+            <!-- Hiển thị tên đầy đủ của người dùng -->
+            <span>[[${#request.remoteUser}]]</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#" style="font-size: 15px;">Thông tin cá nhân</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" style="font-size: 15px;" th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</th:block>
+<!-- Trường hợp người dùng chưa đăng nhập -->
+<th:block th:unless="${#request.remoteUser}">
+    <a th:href="@{/security/login/form}" class="position-relative text-decoration-none text-dark" style="margin-right: 10px;">
+        <i class="bi bi-person-circle m-2"></i>
+    </a>
+</th:block>
+          
+            </div>
+        </div>
+      </nav>
+</header>
+</div>
+</div>
+
+
+

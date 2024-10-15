@@ -1,0 +1,139 @@
+<div xmlns:th="http://www.thymeleaf.org" >
+	<main>
+		<div class="form-container m-auto ">
+        <div class=" text-center text-white ">
+            <h5 class="m-0 fs-1 text-success">Login Form</h5>
+        </div>
+        <div class="card-body">
+         	<form th:action="@{/security/login}" method="post">
+                <div class="form-group">
+                    <label for="username"><i class="bi bi-person"></i> Username</label>
+<input id="username" name="username"  type="text" class="form-control" placeholder="Enter your username" required />
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="bi bi-lock-fill"></i> Password</label>
+                    <input id="password" name="password"  type="password" class="form-control" placeholder="Enter your password" required />
+                </div>
+                <div class="form-group form-button">
+                    <button class="btn btn-success btn-lg btn-block form-submit">Login</button>
+                </div>
+                <div class="form-link ">
+                    <a href="/account/register" class="btn btn-primary text-white">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+	</main>
+</div>
+
+<style>
+/* CSS */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('/img/Web1920-1.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.form-container {
+    width: 400px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 18px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-button {
+    text-align: center;
+}
+
+.form-submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+    background-color: #218838;
+}
+
+.form-link {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.form-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.form-link a:hover {
+    text-decoration: underline;
+}
+
+.register-btn, .forgot-password-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.register-btn:hover {
+    background-color: #138496;
+}
+
+.forgot-password-btn {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.forgot-password-btn:hover {
+    background-color: #e0a800;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<!-- Make sure these paths are correct -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" rel="stylesheet">
