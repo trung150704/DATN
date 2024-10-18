@@ -32,7 +32,7 @@ public class ProductController {
 
         // Tạo Sort và Pageable
         Sort sortOrder = Sort.by(Sort.Direction.fromString(direction), sort);
-        Pageable pageable = PageRequest.of(page, 8, sortOrder);
+        Pageable pageable = PageRequest.of(page, 12, sortOrder);
         Page<Product> productPage;
 
         // Lấy dữ liệu sản phẩm từ dịch vụ

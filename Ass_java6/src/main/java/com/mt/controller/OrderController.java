@@ -30,4 +30,9 @@ public class OrderController {
 		model.addAttribute("order", orderService.findById(id));
 		return "order/detail";
 	}
+	
+	@RequestMapping("/order/saleoff")
+	public String saleoff() {
+		return "order/saleoff";
+	}
 }

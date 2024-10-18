@@ -9,4 +9,8 @@ public class ShoppingCartController {
 	public String view() {
 		return "cart/view";
 	}
+	@RequestMapping("/cart/spyt")
+	public String spyt() {
+		return "cart/spyt";
+	}
 }
