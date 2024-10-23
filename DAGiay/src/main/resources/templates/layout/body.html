@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<main>
+<div class="banner">
+  </div>
+  <div class="content">
+   <div class="section">
+    <div class="item">
+     <img alt="All Black in Black" height="400" src="/Images/Black.jpg" width="600"/>
+     <h3>
+      ALL BLACK IN BLACK
+     </h3>
+     <p>
+      Màu đen dụng được nhiều, nhưng để sắc lên nó cũng toát lên một vẻ huyền bí không nhầm chán.
+     </p>
+    </div>
+    <div class="item">
+     <img alt="Outlet Sale" height="400" src="/Images/Sale.jpg" width="600"/>
+     <h3>
+      OUTLET SALE
+     </h3>
+     <p>
+      Dành mục những sản phẩm bán "giá hời" đã được kiểm định online - Online Only, những gì bạn tìm mua sẽ làm gợi nhớ bạn về những gì bạn từng bỏ lỡ, đã bỏ lỡ.
+     </p>
+    </div>
+   </div>
+   <h2>
+    DANH MỤC MUA HÀNG
+   </h2>
+   <div class="categories">
+    <div class="category">
+     <img alt="Giày Nam" height="300" src="https://storage.googleapis.com/a1aa/image/NMw7CYlyhkb6HJE9v5CCAPUUJHLgGWJZuwBTQ7jw4Tbx5r5E.jpg" width="400"/>
+     <h3>
+      GIÀY NAM
+     </h3>
+     <ul>
+      <li>
+       <a href="#">
+        New Arrivals
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Best Seller
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Sale Off
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="category">
+     <img alt="Giày Nữ" height="300" src="https://storage.googleapis.com/a1aa/image/b8prukUtyZqsLBGo1ORtWDipusRTp3q8TyyXPENEGAmw5r5E.jpg" width="400"/>
+     <h3>
+      GIÀY NỮ
+     </h3>
+     <ul>
+      <li>
+       <a href="#">
+        New Arrivals
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Best Seller
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Sale Off
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="category">
+     <img alt="Dòng Sản Phẩm" height="300" src="https://storage.googleapis.com/a1aa/image/9vdOTiBpVcblH1ODyS0TmIXLLuf2RufKdVJojyHKlERBnvmTA.jpg" width="400"/>
+     <h3>
+      DÒNG SẢN PHẨM
+     </h3>
+     <ul>
+      <li>
+       <a href="#">
+        Basas
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Vintas
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Pattas
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="carousel">
+    <div class="container mt-5">
+        <h2>DÀNH CHO BẠN</h2>
+        <div class="row mt-4" id="product-container">
+            <!-- Products will be injected here by JavaScript -->
+        </div>
+        <div class="pagination-container">
+            <div class="pagination-bar">
+                <div class="page-item" onclick="changePage(1)"></div>
+                <div class="page-item" onclick="changePage(2)"></div>
+                <div class="page-item" onclick="changePage(3)"></div>
+            </div>
+        </div>
+    </div>
+
+
+   <div class="slogan">
+    <p class="line1">
+     MUA NGAY ĐỂ NHẬN ƯU ĐÃI ĐẶC BIỆT
+    </p>
+    <p class="line2">
+     VÀ SẮM ĐƯỢC CHO MÌNH NHỮNG SẢN PHẨM CHẤT LƯỢNG NHẤT
+    </p>
+   </div>
+   <div class="cta-bar">
+    <p>
+     HÃY TRỞ THÀNH NGƯỜI ĐỒNG HÀNH VỚI CHÚNG TÔI
+    </p>
+    <button>
+     ĐĂNG KÝ TÀI KHOẢN
+    </button>
+   </div>
+  </div>
+  </div>
+</main>
+</html>

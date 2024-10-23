@@ -1,7 +1,6 @@
 const app = angular.module("shopping-cart-app", []);
 
 app.controller("shopping-cart-ctrl", function($scope, $http) {
-
     // Shopping cart object
     $scope.cart = {
         items: [],

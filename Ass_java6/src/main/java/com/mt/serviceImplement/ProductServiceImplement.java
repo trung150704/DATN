@@ -19,7 +19,7 @@ public class ProductServiceImplement implements ProductService {
 
     @Override
     public Product findById(Integer id) {
-        return productRepository.findById(id).orElse(null);
+        return productRepository.findById(id).get();
     }
 
     @Override
