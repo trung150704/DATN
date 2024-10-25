@@ -5,9 +5,9 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
     $scope.cart = {
         items: [],
 
-        // Add item to cart
+        
         add(id) {
-            let item = this.items.find(item => item.id === id);
+            var item = this.items.find(item => item.id === id);
             if (item) {
                 item.qty++;
                 this.saveToLocalStorage();
@@ -16,15 +16,13 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
                     resp.data.qty = 1;
                     this.items.push(resp.data);
                     this.saveToLocalStorage();
-                }).catch(error => {
-                    console.error("Failed to add item:", error);
-                });
+                })
             }
         },
 
         // Save cart to local storage
         saveToLocalStorage() {
-            let json = JSON.stringify(angular.copy(this.items));
+            var json = JSON.stringify(angular.copy(this.items));
             localStorage.setItem("cart", json);
         },
 

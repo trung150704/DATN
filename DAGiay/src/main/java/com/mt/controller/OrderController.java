@@ -16,15 +16,12 @@
 //	OrderService orderService;
 //	
 //	@RequestMapping("/order/checkout")
-//	public String checkout() {
+//	public String payment(Model model) {
+//		model.addAttribute("pageTitle","Thanh Toán");
 //		return "order/checkout";
 //	}
-//	@RequestMapping("/order/list")
-//	public String list(Model model, HttpServletRequest request) {
-//		String username = request.getRemoteUser();
-//		model.addAttribute("orders", orderService.findByUsername(username));
-//		return "order/list";
-//	}
+//	
+	
 //	@RequestMapping("/order/detail/{id}")
 //	public String detail(@PathVariable("id") Long id, Model model) {
 //		model.addAttribute("order", orderService.findById(id));
