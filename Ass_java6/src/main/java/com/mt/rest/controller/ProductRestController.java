@@ -27,7 +27,7 @@ public class ProductRestController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Product getOne(@PathVariable("id") Integer id) {
         return productService.findById(id);
     }

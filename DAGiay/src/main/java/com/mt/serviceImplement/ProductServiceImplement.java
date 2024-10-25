@@ -1,6 +1,7 @@
 package com.mt.serviceImplement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.mt.entity.Product;
 import com.mt.repository.ProductRepository;
 import com.mt.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class ProductServiceImplement implements ProductService {
@@ -17,14 +20,23 @@ public class ProductServiceImplement implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImplement.class);
+    
     @Override
     public List<Product> findAll() {
         return productRepository.findAll(); // Lấy tất cả sản phẩm
     }
 
     @Override
-    public Product findById(String id) {
-        return productRepository.findById(id).get(); // Lấy sản phẩm theo mã
+    public Product findById(Integer id) {
+        logger.info("Finding product by id: {}", id);
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            logger.info("Product found: {}", product.get());
+        } else {
+            logger.warn("Product not found for id: {}", id);
+        }
+        return product.orElse(null); // Trả về null nếu không tìm thấy
     }
 
     @Override
@@ -33,7 +45,7 @@ public class ProductServiceImplement implements ProductService {
     }
 
     @Override
-    public Page<Product> findByCategoryId(String cid, Pageable pageable) {
+    public Page<Product> findByCategoryId(Integer cid, Pageable pageable) {
         return productRepository.findByCategoryId(cid, pageable); // Phân trang theo danh mục
     }
 
@@ -48,19 +60,17 @@ public class ProductServiceImplement implements ProductService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) { // Thay đổi kiểu id thành Integer
         productRepository.deleteById(id); // Xóa sản phẩm theo mã
     }
 
-	@Override
-	public List<Product> findByCategoryId(String cid) {
-		return productRepository.findByCategoryId(cid);
-	}
+    @Override
+    public List<Product> findByCategoryId(Integer cid) {
+        return productRepository.findByCategoryId(cid);
+    }
 
-	@Override
-	public Page<Product> findByPriceRange(double minPrice, double maxPrice, Pageable pageable) {
-		  return productRepository.findByPriceBetween(minPrice, maxPrice, pageable);
-	}
-
-	
+    @Override
+    public Page<Product> findByPriceRange(double minPrice, double maxPrice, Pageable pageable) {
+        return productRepository.findByPriceBetween(minPrice, maxPrice, pageable);
+    }
 }

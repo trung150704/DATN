@@ -28,32 +28,25 @@ public class ProductController {
     @Autowired
     private SizeService sizeService;
 
-    
     @RequestMapping("/product/list")
     public String list(
             Model model,
-            @RequestParam(value = "cid", required = false) Optional<String> cid,
+            @RequestParam(value = "cid", required = false) Optional<Integer> cid,
             @RequestParam(value = "p", defaultValue = "0") int page,
             @RequestParam(value = "sort", defaultValue = "name") String sort,
             @RequestParam(value = "direction", defaultValue = "asc") String direction,
             @RequestParam(value = "priceFilter", required = false) Optional<String> priceFilter,
             @RequestParam(value = "priceDirection", required = false) Optional<String> priceDirection) {
 
-        // Lấy danh sách các dòng sản phẩm (Describe)
-       
-
-        // Tạo Sort dựa trên các yêu cầu
         Sort sortOrder;
         if (priceDirection.isPresent()) {
             sortOrder = Sort.by(Sort.Direction.fromString(priceDirection.get()), "price");
         } else {
             sortOrder = Sort.by(Sort.Direction.fromString(direction), sort);
         }
-        
         Pageable pageable = PageRequest.of(page, 21, sortOrder);
         Page<Product> productPage;
 
-        // Lọc sản phẩm theo giá tiền
         if (priceFilter.isPresent()) {
             if (priceFilter.get().equals("greater")) {
                 productPage = productService.findByPriceRange(500.0, Double.MAX_VALUE, pageable);
@@ -68,21 +61,15 @@ public class ProductController {
             productPage = productService.findAll(pageable);
         }
 
-        // Thêm dữ liệu vào mô hình
         model.addAttribute("items", productPage.getContent());
         model.addAttribute("page", productPage);
         model.addAttribute("sort", sort);
         model.addAttribute("direction", direction);
         model.addAttribute("priceFilter", priceFilter.orElse(""));
         model.addAttribute("priceDirection", priceDirection.orElse(""));
-        
-    
-
+        model.addAttribute("pageTitle","Trang Sản Phẩm");
         return "product/list";
     }
-
-
-
 
     @RequestMapping("/product/ListNam")
     public String ListNam(
@@ -91,14 +78,11 @@ public class ProductController {
             @RequestParam(value = "sort", defaultValue = "name") String sort,
             @RequestParam(value = "direction", defaultValue = "asc") String direction) {
 
-        // Tạo Sort và Pageable
         Sort sortOrder = Sort.by(Sort.Direction.fromString(direction), sort);
         Pageable pageable = PageRequest.of(page, 15, sortOrder);
 
-        // Gọi tất cả sản phẩm theo CategoryId "DM01"
-        Page<Product> productPage = productService.findByCategoryId("DM01", pageable);
+        Page<Product> productPage = productService.findByCategoryId(1, pageable); // Thay "DM01" bằng ID số nguyên
 
-        // Thêm dữ liệu vào mô hình
         model.addAttribute("items", productPage.getContent());
         model.addAttribute("page", productPage);
         model.addAttribute("sort", sort);
@@ -106,6 +90,7 @@ public class ProductController {
 
         return "product/ListNam";
     }
+
     @RequestMapping("/product/ListNu")
     public String ListNu(
             Model model,
@@ -113,14 +98,11 @@ public class ProductController {
             @RequestParam(value = "sort", defaultValue = "name") String sort,
             @RequestParam(value = "direction", defaultValue = "asc") String direction) {
 
-        // Tạo Sort và Pageable
         Sort sortOrder = Sort.by(Sort.Direction.fromString(direction), sort);
         Pageable pageable = PageRequest.of(page, 15, sortOrder);
 
-        // Gọi tất cả sản phẩm theo CategoryId "DM01"
-        Page<Product> productPage = productService.findByCategoryId("DM02", pageable);
+        Page<Product> productPage = productService.findByCategoryId(2, pageable); // Thay "DM02" bằng ID số nguyên
 
-        // Thêm dữ liệu vào mô hình
         model.addAttribute("items", productPage.getContent());
         model.addAttribute("page", productPage);
         model.addAttribute("sort", sort);
@@ -128,15 +110,14 @@ public class ProductController {
 
         return "product/ListNu";
     }
-    
 
     @RequestMapping("/product/detail/{id}")
-    public String detail(Model model, @PathVariable("id") String id) {
+    public String detail(Model model, @PathVariable("id") Integer id) {
         Product item = productService.findById(id);
         List<Size> sizes = sizeService.findAll();
         model.addAttribute("item", item);
         model.addAttribute("sizes", sizes);
+        model.addAttribute("pageTitle", item.getName());
         return "product/detail";
-    } 
-    
+    }
 }

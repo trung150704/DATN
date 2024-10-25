@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mt.entity.OrderDetail;
 
-public interface OrderDetailDAO extends JpaRepository<OrderDetail, String>{
+public interface OrderDetailRepository extends JpaRepository<OrderDetail, String>{
 
 }

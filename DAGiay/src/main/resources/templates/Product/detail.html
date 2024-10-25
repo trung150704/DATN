@@ -1,104 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 th:replace="~{/layout/index :: dynamic(~{::main})}">
-<head>
-    <meta charset="utf-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<link href="/css/bootstrap.min.css" rel="stylesheet" />
-<link href="/css/bootstrap-icons.css" rel="stylesheet" />
-</head>
 <body>
-    <main class="container mt-5" th:object="${items}">
+    <main class="container mt-4"  >
     <div class="row">
         <div class="col-5 m-2 d-flex" >
         	<nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#" th:text=${item.category.id}></a></li>
-                <li class="breadcrumb-item"><a href="#" th:text=${item.describe}></a></li>
-                <li class="breadcrumb-item active"  th:text=${item.name}></li>
+                <li class="breadcrumb-item"><a href="#" th:text="${item.category.id}"></a></li>
+                
+                <li class="breadcrumb-item"><a href="#" th:text="${item.describe}"></a></li>
+                <li class="breadcrumb-item active"  th:text="${item.name}"></li>
             </ol>
         	</nav>
         </div>
         <hr>
-            <div class="col-md-6" >
+            <div class="col-md-6">
                 <!-- Main Product Image -->
                 <img th:src="@{/Images/{images}(images=${item.images})}" class="img-fluid w-100 product-img " alt="Product Image"/>
             </div>
             <div class="col-md-6">
                 <!-- Product Details -->
-                <h2 class="fw-bold m-3" th:text=${item.name}></h2>
-                <h4 class="fw-normal m-3">Mã sản phẩm: <strong th:text=${item.id}></strong></h4>
-                <p class="fs-3 text-warning m-3 fw-bold" th:text="${item.price}+' VNG'"></p>
+                <h2 class="fw-bold m-3" th:text="${item.name}"></h2>
+                <h4 class="fw-normal m-3">Mã sản phẩm: <strong th:text="${item.id}"></strong></h4>
+                <p class="fs-3 text-warning m-3 fw-bold" th:text="${item.price}+' VNĐ'"></p>
                 <hr style="border-top: 1px dashed #ccc;">
-                <h5 class="fw-normal m-3">Dòng sản phẩm: <strong th:text=${item.describe}></strong></h5>
+                <h5 class="fw-normal m-3">Dòng sản phẩm: <strong th:text="${item.describe}"></strong></h5>
                 <p  class="text-success fw-bold m-3"></p>
                 <hr style="border-top: 1px dashed #ccc;">
                 <div class="d-flex m-3">
 		            <div class="col-md-6 m-1">
 		                <label for="size" class="form-label fs-2 fw-bold">SIZE</label>
-		                <select id="size" class="form-select custom-select">
+		                <select id="size" class="form-select custom-select w-50 ">
 		                    <option th:each="size : ${sizes}" 
-					                th:value="${size.id}" 
-					                th:text="${size.size}">Size
+					                th:text="${size.size}" 
+					                th:value="${size.size}">Size
 					        </option>
 		                </select>
-		            </div><!-- 
+		            </div>
 		            <div class="col-md-6 m-1">
-		                <label for="quantity" class="form-label fs-2 fw-bold">SỐ LƯỢNG</label>
-		                <select id="quantity" class="form-select custom-select">
-		                    <option selected>Chọn số lượng</option>
-		                    <option value="1">1</option>
-		                </select>
-		            </div> -->
+                    <label for="quantity"  class="form-label fs-2 fw-bold">Số lượng: </label>
+                    <input class="w-50 form-label rounded" placeholder="Chọn số lượng" id="quantity" ng-change="cart.saveToLocalStorage()" ng-model="item.qty"  type = "number" min="1" style="width: 50px; height: 38px">
+                	</div>
 		        </div>
                 <div class="d-flex m-3">
                 	<div class="col-md-10 m-1">
-                	<button  ng-click="cart.add(item.id)"
-                	class="btn btn-primary btn-hover w-100 text-center"><i class="fa fa-cart-fill"></i>Thêm vào giỏ hàng
-                	</button>
+	                	<button class="btn btn-success w-100 fw-bold fs-4" th:attr="ng-click=@{|cart.add(${item.id})|}" style="height: 50px; background: black">
+	                	THÊM VÀO GIỎ HÀNG</button>
                 	</div>
                 	<div class="col-md-2 m-1">
-                	<button class="w-100 btn btn-success" style="height: 50px;"><i class="bi bi-chat-square-heart-fill"></i></button>
+                	<button ng-click="cart.addToFavorites(item.id)" class="w-100 btn btn-success fs-5" style="height: 50px; background: black">
+					    <i class="bi bi-chat-square-heart-fill"></i>
+					</button>
+
                 	</div>
                 </div>
-                <button class="btn btn-info m-3 w-100" style="height: 50px;">THANH TOÁN</button>
-                
+                <!--th:href="@{/cart/payment}"-->
+                <a><button class="btn m-3 w-100 fw-bold fs-3 text-light" style="height: 50px; background: #f60" >THANH TOÁN</button></a>
             </div>
         </div>
-        <hr style="border-top: 1px dashed #ccc;">
-        <div class="col-12">
-        <h1 class="text-center ">SẢN PHẨM LIÊN QUAN</h1>
-                <div class="d-flex mt-4">
-                    <div class="col-md-3">
-                        <img src="" class="img-thumbnail" alt="Thumbnail 1">
-                        <h5 class="text-center">Pattas Tomo - High Top</h5>
-                        <h5 class="text-center">Offwhite</h5>
-                        <h5 class="text-center">750.000VND</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="" class="img-thumbnail" alt="Thumbnail 2">
-                        <h5 class="text-center">Pattas Tomo - High Top</h5>
-                        <h5 class="text-center">Offwhite</h5>
-                        <h5 class="text-center">750.000VND</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="" class="img-thumbnail" alt="Thumbnail 3">
-                        <h5 class="text-center">Pattas Tomo - High Top</h5>
-                        <h5 class="text-center">Offwhite</h5>
-                        <h5 class="text-center">750.000VND</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="" class="img-thumbnail" alt="Thumbnail 4">
-                        <h5 class="text-center">Pattas Tomo - High Top</h5>
-                        <h5 class="text-center">Offwhite</h5>
-                        <h5 class="text-center">750.000VND</h5>
-                    </div>
-                </div>
-            </div>
-            <hr style="border-top: 1px dashed #ccc;">
-        <div class="col-12">
-        <h1 class="text-center ">SẢN PHẨM ĐÃ XEM</h1>
+        <hr style="border-top: 1px dashed #ccc;" class="mt-5">
+        <strong class="d-flex justify-content-center mt-4 fs-3">SẢN PHẨM LIÊN QUAN</strong>
+        <div id="relatedProductsCarousel" class="carousel slide"  >
+	    <div class="carousel-inner">
+	        <div class="carousel-item active">
+	            <div class="row">
+	                <div class="col-md-3" th:each="p, status : ${item.category.products}" th:if="${status.index < 4}">
+	                    <div class="mt-4">
+	                        <a th:href="@{|product/detail/${p.id}|}">
+	                            <img th:src="@{/Images/{images}(images=${p.images})}" class="img-thumbnail w-100" alt="Thumbnail" style="border: none">
+	                        </a>
+	                        <h5 class="text-center" th:text="${p.name}"></h5>
+	                        <h5 class="text-center" th:text="${p.describe}"></h5>
+	                        <h5 class="text-center" th:text="${p.price} + ' VNĐ'"></h5>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="carousel-item">
+	            <div class="row">
+	                <div class="col-md-3" th:each="p, status : ${item.category.products}" th:if="${status.index >= 4 && status.index < 8}">
+	                    <div class="mt-4">
+	                        <a th:href="@{|product/detail/${p.id}|}">
+	                            <img th:src="@{/Images/{images}(images=${p.images})}" class="img-thumbnail w-100" alt="Thumbnail" style="border: none">
+	                        </a>
+	                        <h5 class="text-center" th:text="${p.name}"></h5>
+	                        <h5 class="text-center" th:text="${p.describe}"></h5>
+	                        <h5 class="text-center" th:text="${p.price} + ' VNĐ'"></h5>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+    	</div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="prev" 
+    style="border-radius: 50%; 
+           width: 50px; 
+           height: 50px;
+           top: 170px; 
+           left: -60px;
+           display: flex; 
+           align-items: center; 
+           justify-content: center; 
+           transition: 0.3s ease;"
+           >
+           <i class="bi bi-caret-left-fill" style="width: 20px; height: 20px; color: black"></i>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="next"
+	    style="border-radius: 50%; 
+	           width: 50px; 
+	           height: 50px; 
+	           top: 170px; 
+           	   right: -60px;
+	           display: flex; 
+	           align-items: center; 
+	           justify-content: center; 
+	           transition: 0.3s ease;">
+	           <i class="bi bi-caret-right-fill" style="width: 20px; height: 20px; color: black"></i>
+	</button>
+</div>
+
+
+        <!-- <div class="col-12"> -->
+        <!-- <h1 class="text-center ">SẢN PHẨM ĐÃ XEM</h1>
                 <div class="d-flex mt-4">
                     <div class="col-md-3">
                         <img src="" class="img-thumbnail" alt="Thumbnail 1">
@@ -126,9 +149,9 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
                     </div>
                 </div>
                 
-            </div>
+            </div> -->
+            <br>
+            <br>
     </main>
-    <script src="/js/common.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

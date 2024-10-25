@@ -71,6 +71,9 @@
       </i>
      </div>
      <div class="icon-container">
+     <a th:href="@{/cart/heart}">
+     <i class="bi bi-bag-heart-fill"></i>
+     </a>
       <a href="#">
        <i class="fas fa-user">
        </i>
@@ -78,10 +81,8 @@
       <a th:href="@{/cart/view}" class="position-relative">
 		    <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
 		    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
-		           style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">0</span>
+		           style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">{{cart.count}}</span>
 		</a>
-
-
      </div>
     </div>
    </nav>

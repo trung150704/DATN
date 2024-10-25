@@ -19,11 +19,11 @@ public class OrderDetail implements Serializable {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "Orderid")
+    @JoinColumn(name = "orderid")
     Order order;
 
     @ManyToOne
-    @JoinColumn(name = "Productid")
+    @JoinColumn(name = "productid")
     Product product;
 
     

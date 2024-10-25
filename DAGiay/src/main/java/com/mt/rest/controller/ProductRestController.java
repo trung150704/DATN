@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,15 @@ public class ProductRestController {
 
     // Lấy sản phẩm theo ID
     @GetMapping("{id}")
-    public Product getOne(@PathVariable("id") String id) {
-        return productService.findById(id); 
+    public ResponseEntity<Product> getOne(@PathVariable("id") Integer id) {
+        Product product = productService.findById(id);
+        if (product != null) {
+            System.out.println("Product found: " + product); // In ra sản phẩm tìm thấy
+            return ResponseEntity.ok(product);
+        } else {
+            System.out.println("Product not found for id: " + id); // Nếu không tìm thấy, in ra lỗi
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Lấy tất cả sản phẩm
@@ -52,15 +60,15 @@ public class ProductRestController {
 
     // Cập nhật sản phẩm
     @PutMapping("/{id}")
-    public Product update(@PathVariable("id") String maSanPham, @RequestBody Product product) {
+    public Product update(@PathVariable("id") Integer id, @RequestBody Product product) { // Thay đổi kiểu id thành Integer
         // Cần thiết lập mã sản phẩm cho đối tượng sản phẩm mới
-        product.setId(maSanPham); // Đảm bảo mã sản phẩm trong đối tượng
+        product.setId(id); // Đảm bảo mã sản phẩm trong đối tượng
         return productService.update(product);
     }
 
     // Xóa sản phẩm
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") String id) {
+    public void delete(@PathVariable("id") Integer id) { // Thay đổi kiểu id thành Integer
         productService.delete(id);
     }
 }

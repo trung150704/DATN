@@ -15,14 +15,13 @@ import java.util.List;
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
     @Id
-  
     private String id;
     @Temporal(TemporalType.DATE)
     @Column(name = "Created_at")
     private Date created_at = new Date();
     
     private Double amout;
-    private String status;
+    private Boolean status;
     private String address;
 
     @ManyToOne

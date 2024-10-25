@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+<main th:fragment="shopping_cart">
+       <div class="container">
+       <h3 class="m-4 fw-bold d-flex justify-content-center">DANH MỤC YÊU THÍCH CỦA BẠN</h3>
+       <div class="row">
+       	<h6 class="">1 : (Tổng sản phẩm)</h6>
+       	<hr>
+       	<div class="col-12 d-flex">
+       		<div class="col-md-10 d-flex">
+       		<img src="/img/ankle_boots.jpeg" alt="Product Image" style="width: 200px;" class="me-4 align-self-start">
+       		<div><h5 class="">Hiphop Graphic Tee - Outline Typo</h5>
+       		<h6 class="text-secondary">Giá: 200.000 VNĐ</h6> <strong class="text-secondary text-decoration-line-through">350.000 VNĐ</strong>
+       		<div class="d-flex align-items-center mt-5">
+                <div class="me-4">
+                    <label for="size" class="form-label fw-bold text-secondary">Size</label>
+                    <select id="size" class="form-select form-select-sm">
+                        <option selected>S</option>
+                        <option value="1">M</option>
+                        <option value="2">L</option>
+                    </select>
+                </div>
+                <div class="me-4">
+                    <label for="quantity" class="form-label fw-bold text-secondary">Số lượng</label>
+                    <select id="quantity" class="form-select form-select-sm">
+                        <option selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                    </select>
+                </div>
+            </div></div>
+       		</div>
+       		<div class="col-md-2 text-end">
+                    <strong class="fw-bold fs-4" style="color: orange">200.000 VNĐ</strong>
+                    <h6 class="text-secondary mt-4">Hết hàng</h6>
+                    <div class="d-flex flex-column align-items-end mt-4">
+                        <button class="btn btn-light w-50 border mb-2"><i class="bi bi-cart-plus"></i></button>
+                        <button class="btn btn-dark w-50 mt-2"><i class="bi bi-trash3"></i></button>
+                    </div>
+              </div>
+       	</div>
+       	<hr class="mt-4">
+       	<div class="">
+       	<button class="btn btn-dark fw-bold border">XÓA HẾT</button>
+        <button class="btn btn-dark fw-bold float-end">TIẾP TỤC MUA HÀNG</button>
+       	</div>
+       </div>
+       </div>
+</main>
+</body>
+</html>
