@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
 <body>
-<main th:fragment="shopping_cart">
-       <div class="container">
-       <h3 class="m-4 fw-bold d-flex justify-content-center">DANH MỤC YÊU THÍCH CỦA BẠN</h3>
-       <div class="row">
-       	<h6 class="">1 : (Tổng sản phẩm)</h6>
-       	<hr>
-       	<div class="col-12 d-flex">
-       		<div class="col-md-10 d-flex">
-       		<img src="/img/ankle_boots.jpeg" alt="Product Image" style="width: 200px;" class="me-4 align-self-start">
-       		<div><h5 class="">Hiphop Graphic Tee - Outline Typo</h5>
-       		<h6 class="text-secondary">Giá: 200.000 VNĐ</h6> <strong class="text-secondary text-decoration-line-through">350.000 VNĐ</strong>
-       		<div class="d-flex align-items-center mt-5">
-                <div class="me-4">
-                    <label for="size" class="form-label fw-bold text-secondary">Size</label>
-                    <select id="size" class="form-select form-select-sm">
-                        <option selected>S</option>
-                        <option value="1">M</option>
-                        <option value="2">L</option>
-                    </select>
+<main th:fragment="shopping_cart" action="#" method="get">    
+    <br>
+    <div class="container mt-4"></div>
+    <hr>
+    <!-- Cart and summary -->
+    <div class="row">
+        <!-- Cart Items -->
+        <div class="col-12">
+            <div class="p-2" style="background-color: #e9ecef;">
+                <h4 class="fw-bold mt-2">GIỎ HÀNG</h4>
+            </div>
+
+            <!-- Product Item -->
+            <div class="row border-bottom py-3 " ng-repeat="item in cart.items">
+                <!-- Product Image -->
+                <div class="col-md-2">
+                    <img ng:src="/Images/{{item.images}}" alt="Product Image" class="img-fluid rounded" style="width: 100%; max-width: 200px;">
                 </div>
-                <div class="me-4">
-                    <label for="quantity" class="form-label fw-bold text-secondary">Số lượng</label>
-                    <select id="quantity" class="form-select form-select-sm">
-                        <option selected>1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                    </select>
-                </div>
-            </div></div>
-       		</div>
-       		<div class="col-md-2 text-end">
-                    <strong class="fw-bold fs-4" style="color: orange">200.000 VNĐ</strong>
-                    <h6 class="text-secondary mt-4">Hết hàng</h6>
-                    <div class="d-flex flex-column align-items-end mt-4">
-                        <button class="btn btn-light w-50 border mb-2"><i class="bi bi-cart-plus"></i></button>
-                        <button class="btn btn-dark w-50 mt-2"><i class="bi bi-trash3"></i></button>
+
+                <!-- Product Info -->
+                <div class="col-md-7">
+                    <h5 class="fw-bold">{{item.name}}</h5>
+                    <p class="text-secondary mt-4"> <strong>Giá:</strong> {{item.price | number:3}} VNĐ</p>
+                    <div class="d-flex mt-5 float-start">
+                        <!-- Size Selector -->
+                        <div class="mt-5 m-2" style="position: relative; bottom: 10px;">
+                            <label class="form-label fw-bold text-dark">Size: </label>
+                            <span>{{item.size}}</span>
+                        </div>
+
+                        <!-- Quantity Selector -->
+                        <div class="mt-4 m-2" style="position: relative; top: 7px;">
+                            <label for="quantity" class="form-label fw-bold text-dark">Số lượng: </label>
+                            <input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" type="number" min="1" class="form-control d-inline-block" style="width: 70px;">
+                        </div>
                     </div>
-              </div>
-       	</div>
-       	<hr class="mt-4">
-       	<div class="">
-       	<button class="btn btn-dark fw-bold border">XÓA HẾT</button>
-        <button class="btn btn-dark fw-bold float-end">TIẾP TỤC MUA HÀNG</button>
-       	</div>
-       </div>
-       </div>
+                </div>
+
+                <!-- Price and Actions -->
+                <div class="col-md-3 text-end">
+                    <p class="text-danger fw-bold fs-4">{{(item.price * item.qty) | number:3 }} VNĐ</p>
+                    <span class="text-success d-block mb-5 fw-bold">Còn hàng</span>
+                    <div class="mt-5" style="position: relative; top: 33px">
+                        <!-- Heart Icon -->
+                        <button class="btn btn-outline-secondary me-2"><i class="bi bi-cart-fill"></i></button>
+                        <!-- Trash Icon -->
+                        <button ng-click="cart.remove(item.id)" class="btn btn-dark"><i class="bi bi-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 mt-4">
+            <a th:href="@{/product/list}" class="btn btn-dark text-light fw-bold float-end">QUAY LẠI MUA HÀNG</a>
+            <button ng-click="cart.clear()" class="btn btn-dark text-light btn-warning fw-bold">XÓA HẾT</button>
+        </div>
+    </div>
+    <br>
 </main>
 </body>
 </html>

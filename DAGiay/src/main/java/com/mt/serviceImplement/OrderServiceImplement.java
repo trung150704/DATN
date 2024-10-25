@@ -38,18 +38,18 @@ public class OrderServiceImplement implements OrderService {
         return hoaDon;
     }
 
-    @Override
-    public Order findById(String id) {  // Changed from Integer to Long
-        return orderRepository.findById(id).get(); // Changed from get() to orElse(null) for safety
-    }
+//    @Override
+//    public Order findById(String id) {  // Changed from Integer to Long
+//        return orderRepository.findById(id).get(); // Changed from get() to orElse(null) for safety
+//    }
 
     @Override
     public List<Order> findByUsername(String id) {
         return orderRepository.findByUsername(id);
     }
 
-	@Override
-	public List<Order> findAll() {
-		return orderRepository.findAll();
-	}
+//	@Override
+//	public List<Order> findAll() {
+//		return orderRepository.findAll();
+//	}
 }

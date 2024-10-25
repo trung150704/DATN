@@ -8,9 +8,9 @@ import com.mt.entity.Order;
 public interface OrderService {
 	Order create(JsonNode orderData);
 
-	Order findById(String id);
+	//Order findById(String id);
 
 	List<Order> findByUsername(String username);
 
-	List<Order> findAll();
+	//List<Order> findAll();
 }

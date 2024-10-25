@@ -49,11 +49,11 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
 	                	THÊM VÀO GIỎ HÀNG</button>
                 	</div>
                 	<div class="col-md-2 m-1">
-                	<button ng-click="cart.addToFavorites(item.id)" class="w-100 btn btn-success fs-5" style="height: 50px; background: black">
-					    <i class="bi bi-chat-square-heart-fill"></i>
-					</button>
+    <button ng-click="cart.addFavorite(item.id)" class="w-100 btn btn-success fs-5" style="height: 50px; background: black">
+        <i class="bi bi-chat-square-heart-fill"></i>
+    </button>
+</div>
 
-                	</div>
                 </div>
                 <!--th:href="@{/cart/payment}"-->
                 <a><button class="btn m-3 w-100 fw-bold fs-3 text-light" style="height: 50px; background: #f60" >THANH TOÁN</button></a>

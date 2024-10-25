@@ -35,11 +35,17 @@ public class ShoppingCartController {
 		return "cart/checkout";
 	}
 	
-	@RequestMapping("/cart/confirmation")
-	public String checkout(Model model, @PathVariable("id")	String id) {
-		Order order = orderService.findById(id);
-		model.addAttribute("order",order);
+	@RequestMapping("/cart/success")
+	public String checkout(Model model) {
+		//Order order = orderService.findById(id);
+		//model.addAttribute("order",order);
 		model.addAttribute("pageTitle","Xác nhận đơn hàng");
-		return "cart/confirmation";
+		return "cart/success";
+	}
+	
+	@RequestMapping("/cart/saleoff")
+	public String saleoff(Model model) {
+		model.addAttribute("pageTitle","Giảm giá");
+		return "cart/saleoff";
 	}
 }
