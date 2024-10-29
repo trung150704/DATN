@@ -20,36 +20,42 @@ public class OrderServiceImplement implements OrderService {
     @Autowired
     OrderRepository orderRepository;
     @Autowired
-    OrderDetailRepository  orderDetailRepository;
+    OrderDetailRepository orderDetailRepository;
 
     @Override
     public Order create(JsonNode orderData) {
         ObjectMapper mapper = new ObjectMapper();
+        Order order = mapper.convertValue(orderData, Order.class);
+        orderRepository.save(order);
         
-        Order hoaDon = mapper.convertValue(orderData, Order.class);
-        orderRepository.save(hoaDon);
-        
-        TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {
-        };
-        
+        TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
         List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetails"), type)
-                .stream().peek(d -> d.setOrder(hoaDon)).collect(Collectors.toList());
+                .stream().peek(d -> d.setOrder(order)).collect(Collectors.toList());
         orderDetailRepository.saveAll(details);
-        return hoaDon;
+        return order;
     }
-
-//    @Override
-//    public Order findById(String id) {  // Changed from Integer to Long
-//        return orderRepository.findById(id).get(); // Changed from get() to orElse(null) for safety
-//    }
 
     @Override
-    public List<Order> findByUsername(String id) {
-        return orderRepository.findByUsername(id);
+    public void createOrder(Order order, List<OrderDetail> orderDetails) {
+        if (order == null || orderDetails == null || orderDetails.isEmpty()) {
+            throw new IllegalArgumentException("Order and order details must not be null or empty");
+        }
+
+        // Debugging logs
+        System.out.println("Saving Order: " + order);
+        System.out.println("Saving Order Details: " + orderDetails);
+
+        orderRepository.save(order); // Lưu đơn hàng
+
+        // Cập nhật quan hệ giữa Order và OrderDetail
+        for (OrderDetail detail : orderDetails) {
+            detail.setOrder(order); // Gán Order cho OrderDetail
+            orderDetailRepository.save(detail); // Lưu OrderDetail
+        }
     }
 
-//	@Override
-//	public List<Order> findAll() {
-//		return orderRepository.findAll();
-//	}
+    @Override
+    public List<Order> findByUsername(String username) {
+        return orderRepository.findByUsername(username);
+    }
 }

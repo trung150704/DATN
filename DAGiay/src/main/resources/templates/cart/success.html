@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
 <body>
 	<main>
-		<div class="container">
+		<!-- <div class="container">
 			<br> <br>
 			<h2>Xác nhận đơn hàng</h2>
 
@@ -11,16 +11,19 @@
 				<p>Thông tin đơn hàng:</p>
 				<ul>
 					<li ng-repeat="item in cart.items">
-						<span>{{ item.name }} - {{ item.size }} - Số lượng: {{ item.qty }} - Giá: {{ item.price }} VNĐ</span>
+						<span>{{ item.name }} - {{ item.size }} - Số lượng: {{ item.qty }} - Giá: {{ item.price | number : 3 }} VNĐ</span>
 					</li>
 				</ul>
 				<p>Tổng tiền: {{ cart.amount | number:3 }} VNĐ</p>
 				
-				<p>Địa chỉ giao hàng: <span >Địa chỉ</span></p> <!-- Sửa dòng này để hiển thị địa chỉ -->
+				<p>Địa chỉ giao hàng: <span >Địa chỉ</span></p>
 			</div>
 
 			<br> <br>
-		</div>
+		</div> -->
+		<h2>Đơn hàng của bạn đã được đặt thành công!</h2>
+	    <p>Mã đơn hàng: <span th:text="${order.id}"></span></p>
+	    <p>Tổng cộng: <span th:text="${order.amout}">0</span> VNĐ</p>
 	</main>
 </body>
 </html>
