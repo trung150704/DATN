@@ -2,6 +2,8 @@ package com.mt.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,7 +19,8 @@ public class Size implements Serializable {
 
     private int Size;
 
-    @OneToMany(mappedBy = "size")
+    @OneToMany(mappedBy = "size",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<SizeProduct> sizeProducts;
 
     // Getters and Setters

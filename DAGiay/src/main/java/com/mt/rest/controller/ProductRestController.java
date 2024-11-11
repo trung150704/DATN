@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,16 +29,9 @@ public class ProductRestController {
     ProductService productService;
 
     // Lấy sản phẩm theo ID
-    @GetMapping("{id}")
-    public ResponseEntity<Product> getOne(@PathVariable("id") Integer id) {
-        Product product = productService.findById(id);
-        if (product != null) {
-            System.out.println("Product found: " + product); // In ra sản phẩm tìm thấy
-            return ResponseEntity.ok(product);
-        } else {
-            System.out.println("Product not found for id: " + id); // Nếu không tìm thấy, in ra lỗi
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/{id}")
+    public Product getOne(@PathVariable("id") Integer id) {
+        return productService.findById(id);
     }
 
     // Lấy tất cả sản phẩm
@@ -60,7 +54,7 @@ public class ProductRestController {
 
     // Cập nhật sản phẩm
     @PutMapping("/{id}")
-    public Product update(@PathVariable("id") Integer id, @RequestBody Product product) { // Thay đổi kiểu id thành Integer
+    public Product update(@PathVariable("id") Integer id, @RequestBody Product product) {
         // Cần thiết lập mã sản phẩm cho đối tượng sản phẩm mới
         product.setId(id); // Đảm bảo mã sản phẩm trong đối tượng
         return productService.update(product);
@@ -68,7 +62,13 @@ public class ProductRestController {
 
     // Xóa sản phẩm
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Integer id) { // Thay đổi kiểu id thành Integer
-        productService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        try {
+            productService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting product");
+        }
     }
 }
+

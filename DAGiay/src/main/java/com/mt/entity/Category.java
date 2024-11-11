@@ -2,7 +2,7 @@ package com.mt.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import java.io.Serializable;
@@ -20,15 +20,6 @@ public class Category implements Serializable {
     private String describe;
 
     @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @JsonIgnoreProperties("category")
     private List<Product> products;
-    
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", describe='" + describe + '\'' +
-                '}';
-    }
 }

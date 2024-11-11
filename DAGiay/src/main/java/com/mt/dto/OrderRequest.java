@@ -1,26 +1,15 @@
-package com.mt.dto;
+package com.mt.DTO;
 
-import com.mt.entity.Order;
-import com.mt.entity.OrderDetail;
-import java.util.List;
+import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class OrderRequest {
-    private Order order;
-    private List<OrderDetail> orderDetails;
+    private String orderId;
+    private int amount;
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
 }
+

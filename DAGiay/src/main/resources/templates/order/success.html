@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+	<main>
+	<br>
+	<br>
+		 <div class="col-md-12 d-flex">
+			<div class="col-md-6 m-1" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 15px rgba(0, 0, 0, 0.1);
+			 border-radius: 8px; background-color: #f8f9fa;">
+			<h2 class="fw-bold">Xác nhận đơn hàng</h2>
+
+			<div>
+				<p class="fw-bold">Cảm ơn bạn đã đặt hàng!</p>
+				<p>Thông tin đơn hàng:</p>
+				<ul>
+					<li ng-repeat="item in cart.items">
+						<span>{{ item.name }} - {{ item.size }} - Số lượng: {{ item.qty }} - Giá: {{(item.price * item.qty) | number:3 }} VNĐ</span>
+					</li>
+				</ul>
+				<p> <strong>Tổng tiền:</strong> <span th:text="${tongTien} + ' VNĐ'"></span> </p>
+			</div>
+
+			<br> <br>
+			</div>
+			
+			<div class="col-md-6 m-1" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 15px rgba(0, 0, 0, 0.1);
+			 border-radius: 8px; background-color: #f8f9fa;">
+			<h2 class="fw-bold">Đơn hàng của bạn đã được đặt thành công!</h2>
+		    <p> <strong>Mã đơn hàng: </strong><span th:text="${order.id}"></span></p>
+		    <p> <strong>Tên người nhận: </strong><span th:text="${order.hoten}"></span> </p>
+		    <p> <strong>Số điện thoại</strong> <span th:text="${order.sdt}"></span></p>
+		    <p> <strong>Email: </strong> <span th:text="${order.email}"></span> </p>
+		    <p> <strong>Địa chỉ: </strong> <span th:text="${order.address}"></span> </p>
+			</div>
+		</div>
+		<br> 
+	</main>
+</body>
+</html>

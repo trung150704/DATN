@@ -1,38 +1,23 @@
 package com.mt.entity;
 
-
 import java.io.Serializable;
 import java.util.Objects;
 
+import lombok.Data;
+@Data
 public class SizeProductKey implements Serializable {
-	private static final long serialVersionUID = 1L;
-    private String Productid;
-    private String Sizeid;
+    private static final long serialVersionUID = 1L;
+    private Integer productId; 
+    private String sizeId; 
 
     // Constructor mặc định
     public SizeProductKey() {}
 
-    public SizeProductKey(String Productid, String Sizeid) {
-        this.Productid = Productid;
-        this.Sizeid = Sizeid;
+    public SizeProductKey(Integer productId, String sizeId) {
+        this.productId = productId;
+        this.sizeId = sizeId;
     }
 
-    // Getter và Setter
-    public String getProductid() {
-        return Productid;
-    }
-
-    public void setProductid(String Productid) {
-        this.Productid = Productid;
-    }
-
-    public String getSizeid() {
-        return Sizeid;
-    }
-
-    public void setSizeid(String Sizeid) {
-        this.Sizeid = Sizeid;
-    }
 
     // Phương thức equals và hashCode
     @Override
@@ -40,12 +25,12 @@ public class SizeProductKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SizeProductKey that = (SizeProductKey) o;
-        return Objects.equals(Productid, that.Productid) &&
-                Objects.equals(Sizeid, that.Sizeid);
+        return Objects.equals(productId, that.productId) &&
+                Objects.equals(sizeId, that.sizeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Productid, Sizeid);
+        return Objects.hash(productId, sizeId);
     }
 }

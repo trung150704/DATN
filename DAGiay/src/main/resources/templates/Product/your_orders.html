@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Orders</title>
+</head>
+<body>
+    <h2>Your Orders</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Ngày tạo</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Địa chỉ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.createdAt}"></td>
+                <td th:text="${order.totalAmount}"></td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${order.address}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -28,13 +28,13 @@
                     <div class="d-flex mt-5 float-start">
                         <!-- Size Selector -->
                         <div class="mt-5 m-2" style="position: relative; bottom: 10px;">
-                            <label class="form-label fw-bold text-primary">Size: </label>
+                            <label class="form-label fw-bold text-dark">Size: </label>
                             <span>{{item.size}}</span>
                         </div>
 
                         <!-- Quantity Selector -->
                         <div class="mt-4 m-2" style="position: relative; top: 7px;">
-                            <label for="quantity" class="form-label fw-bold text-primary">Số lượng: </label>
+                            <label for="quantity" class="form-label fw-bold text-dark">Số lượng: </label>
                             <input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" type="number" min="1" class="form-control d-inline-block" style="width: 70px;">
                         </div>
                     </div>
@@ -46,7 +46,9 @@
                     <span class="text-success d-block mb-5 fw-bold">Còn hàng</span>
                     <div class="mt-5" style="position: relative; top: 33px">
                         <!-- Heart Icon -->
-                        <button class="btn btn-outline-secondary me-2"><i class="bi bi-heart"></i></button>
+                        <button ng-click="cart.addToFavoritesFromCart(item)" class="btn btn-outline-secondary me-2">
+				            <i class="bi bi-heart"></i>
+				        </button>
                         <!-- Trash Icon -->
                         <button ng-click="cart.remove(item.id)" class="btn btn-dark"><i class="bi bi-trash"></i></button>
                     </div>
@@ -64,7 +66,7 @@
                 <hr style="border-top: 1px dashed #ccc;">
                 <p><strong>Số lượng: <span class="float-end">{{cart.count}}</span></strong></p>
                 <p><strong>TẠM TINH: <span class="float-end">{{cart.amount | number:3}} VNĐ</span></strong></p>
-                <a th:href="@{/cart/checkout}"><button class="btn btn-warning w-100 mt-3 fw-bold text-light p-3 fs-4" style="background: #f60">TIẾP TỤC THANH TOÁN</button></a>
+                <a th:href="@{/order/checkout}"><button class="btn btn-warning w-100 mt-3 fw-bold text-light p-3 fs-4" style="background: #f60">TIẾP TỤC THANH TOÁN</button></a>
             </div>
         </div>
 

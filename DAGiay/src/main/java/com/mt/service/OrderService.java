@@ -6,8 +6,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mt.entity.Order;
 import com.mt.entity.OrderDetail;
 
+
 public interface OrderService {
     Order create(JsonNode orderData);
     List<Order> findByUsername(String username);
     void createOrder(Order order, List<OrderDetail> orderDetails);
+    List<Order> findAll();
+	Order save(Order order);
 }

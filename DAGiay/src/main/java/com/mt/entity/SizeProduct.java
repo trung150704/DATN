@@ -1,33 +1,39 @@
 package com.mt.entity;
 
 import javax.persistence.*;
-import lombok.Data;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
+import lombok.Data;
 
 @Data
 @Entity
-@IdClass(SizeProductKey.class)  // Sử dụng composite key
+@IdClass(SizeProductKey.class)  // Sử dụng khóa chính tổng hợp
 @Table(name = "SizeProduct")
 public class SizeProduct implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "Productid")
-    private String Productid; // Khai báo thuộc tính cơ bản
+
+	@Id
+    @Column(name = "ProductId")
+    private Integer productId;
 
     @Id
-    @Column(name = "Sizeid")
-    private String Sizeid; // Khai báo thuộc tính cơ bản
+    @Column(name = "SizeId")
+    private String sizeId;
 
     private int count;
 
-    // Quan hệ với Product và Size
     @ManyToOne
-    @JoinColumn(name = "Productid", insertable = false, updatable = false)
+    @JoinColumn(name = "ProductId", insertable = false, updatable = false)
+    @JsonIgnore
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "Sizeid", insertable = false, updatable = false)
+    @JoinColumn(name = "SizeId", insertable = false, updatable = false)
+    @JsonIgnore
     private Size size;
 
-    // Getters và Setters
+
 }

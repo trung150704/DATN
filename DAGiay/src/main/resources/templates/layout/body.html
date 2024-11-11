@@ -35,7 +35,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
    </h2>
    <div class="categories">
     <div class="category">
-     <img alt="Giày Nam" height="300" src="https://storage.googleapis.com/a1aa/image/NMw7CYlyhkb6HJE9v5CCAPUUJHLgGWJZuwBTQ7jw4Tbx5r5E.jpg" width="400"/>
+     <img alt="Giày Nam" height="300" src="https://sneakerdaily.vn/wp-content/uploads/2020/05/54727996_1021210818049454_4005129081661161472_o.jpg.webp" width="400"/>
      <h3>
       GIÀY NAM
      </h3>
@@ -58,7 +58,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
      </ul>
     </div>
     <div class="category">
-     <img alt="Giày Nữ" height="300" src="https://storage.googleapis.com/a1aa/image/b8prukUtyZqsLBGo1ORtWDipusRTp3q8TyyXPENEGAmw5r5E.jpg" width="400"/>
+     <img alt="Giày Nữ" height="300" src="https://vietnamleather.com/wp-content/uploads/2022/12/giay-ananas-3-400x400.jpg" width="400"/>
      <h3>
       GIÀY NỮ
      </h3>
@@ -81,7 +81,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
      </ul>
     </div>
     <div class="category">
-     <img alt="Dòng Sản Phẩm" height="300" src="https://storage.googleapis.com/a1aa/image/9vdOTiBpVcblH1ODyS0TmIXLLuf2RufKdVJojyHKlERBnvmTA.jpg" width="400"/>
+     <img alt="Dòng Sản Phẩm" height="300" src="https://staging.ananas.vn/wp-content/uploads/SC_Mobile_Banner.jpg"  width="400"/>
      <h3>
       DÒNG SẢN PHẨM
      </h3>
@@ -107,16 +107,83 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
    <div class="carousel">
     <div class="container mt-5">
         <h2>DÀNH CHO BẠN</h2>
-        <div class="row mt-4" id="product-container">
-            <!-- Products will be injected here by JavaScript -->
-        </div>
-        <div class="pagination-container">
-            <div class="pagination-bar">
-                <div class="page-item" onclick="changePage(1)"></div>
-                <div class="page-item" onclick="changePage(2)"></div>
-                <div class="page-item" onclick="changePage(3)"></div>
+        <div id="allProductsCarousel" class="carousel slide">
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="row">
+                <div class="col-md-3" th:each="p, status : ${items}" th:if="${status.index < 4}">
+                    <div class="product-card position-relative">
+                        <a th:href="@{/product/detail/{id}(id=${p.id})}">
+                            <img th:src="@{/Images/{images}(images=${p.images})}" class="img-thumbnail w-100" alt="Thumbnail" style="border: none">
+                        </a>
+                        <div class="product-title text-center" th:text="${p.name}"></div>
+                        <div class="product-price text-center" th:text="${p.price} + '00 VNĐ'"></div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="row">
+                <div class="col-md-3" th:each="p, status : ${items}" th:if="${status.index >= 4 && status.index < 8}">
+                    <div class="product-card position-relative">
+                        <a th:href="@{/product/detail/{id}(id=${p.id})}">
+                            <img th:src="@{/Images/{images}(images=${p.images})}" class="img-thumbnail w-100" alt="Thumbnail" style="border: none">
+                        </a>
+                        <div class="product-title text-center" th:text="${p.name}"></div>
+                        <div class="product-price text-center" th:text="${p.price} + '00 VNĐ'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <div class="row">
+                <div class="col-md-3" th:each="p, status : ${items}" th:if="${status.index >= 8 && status.index < 12}">
+                    <div class="product-card position-relative">
+                        <a th:href="@{/product/detail/{id}(id=${p.id})}">
+                            <img th:src="@{/Images/{images}(images=${p.images})}" class="img-thumbnail w-100" alt="Thumbnail" style="border: none">
+                        </a>
+                        <div class="product-title text-center" th:text="${p.name}"></div>
+                        <div class="product-price text-center" th:text="${p.price} + '00 VNĐ'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#allProductsCarousel" data-bs-slide="prev" 
+            style="border-radius: 50%; 
+                   width: 50px; 
+                   height: 50px;
+                   top: 170px; 
+                   left: -60px;
+                   display: flex; 
+                   align-items: center; 
+                   justify-content: center; 
+                   transition: 0.3s ease;">
+        <i class="bi bi-caret-left-fill" style="width: 20px; height: 20px; color: black"></i>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#allProductsCarousel" data-bs-slide="next"
+            style="border-radius: 50%; 
+                   width: 50px; 
+                   height: 50px; 
+                   top: 170px; 
+                   right: -60px;
+                   display: flex; 
+                   align-items: center; 
+                   justify-content: center; 
+                   transition: 0.3s ease;">
+        <i class="bi bi-caret-right-fill" style="width: 20px; height: 20px; color: black"></i>
+    </button>
+</div>
+
+
+        
     </div>
 
 
@@ -132,7 +199,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
     <p>
      HÃY TRỞ THÀNH NGƯỜI ĐỒNG HÀNH VỚI CHÚNG TÔI
     </p>
-    <button>
+    <button th:href="@{|/security/register|}">
      ĐĂNG KÝ TÀI KHOẢN
     </button>
    </div>
