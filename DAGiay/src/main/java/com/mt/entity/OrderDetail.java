@@ -12,18 +12,19 @@ import java.io.Serializable;
 @Table(name = "OrderDetails")
 public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
-    @Id
-    private String id;
-
-    private int count;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+	private  Integer quantity;
     private Double price;
-
+    //private String productName;
+    private String size;
     @ManyToOne
-    @JoinColumn(name = "Orderid")
+    @JoinColumn(name = "orderid")
     Order order;
 
     @ManyToOne
-    @JoinColumn(name = "Productid")
+    @JoinColumn(name = "productid")
     Product product;
 
     

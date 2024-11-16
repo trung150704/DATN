@@ -1,51 +1,43 @@
 <div class="panel panel-default" ng-if="items">
-	<div class="panel-heading">PRODUCT LIST</div>
-	<table class="table table-condensed">
-		<thead class="bg-succes" style="font-variant: small-caps;">
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Image</th>
-				<th>Price</th>
-				<th>Date</th>
-				<th>Describe</th>
-				<th>Category</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="item in pager.items">
-				<td>{{item.id}}</td>
-				<td>{{item.name}}</td>
-				  <td>
+    <div class="panel-heading">PRODUCT LIST</div>
+    <table class="table table-condensed">
+        <thead class="bg-success" style="font-variant: small-caps;">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Describe</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in pager.items">
+                <!-- Gán productId khi nhấn vào dòng -->
+                <td ng-click="selectProduct(item.id)">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>
                     <img ng-src="{{ '/Images/' + item.images }}" style="width: 50px; height: 50px;" alt="Product Image">
                 </td>
-				<td>{{item.price | number : 3}} vnđ</td>
-				<td>{{item.create_at | date : 'dd-MM-yyyy'}}</td>
-				<td>{{item.describe}}</td>
-				<td>{{item.category.name}}</td>
-				<td>
-					<div class="btn-group btn-group-xs">
-						<button ng-click="edit(item)" class="btn btn-warning glyphicon glyphicon-edit"></button>
-						<button ng-click="delete(item)" class="btn btn-warning glyphicon glyphicon-trash"></button>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="panel-footer text-center">
-		<button ng-click="pager.first()" class="btn btn-danger">
-			<b class="glyphicon glyphicon-hand-up"></b>
-		</button>
-		<button ng-click="pager.prev()" class="btn btn-primary">
-			<b class="glyphicon glyphicon-hand-left"></b>
-		</button>
-		<button class="btn btn-success">{{pager.page + 1}} of {{pager.count}}</button>
-		<button ng-click="pager.next()" class="btn btn-primary">
-			<b class="glyphicon glyphicon-hand-right"></b>
-		</button>
-		<button ng-click="pager.last()" class="btn btn-danger">
-			<b class="glyphicon glyphicon-hand-down"></b>
-		</button>
-	</div>
+                <td>{{item.price | number : 3}} vnđ</td>
+                <td>{{item.create_at | date : 'dd-MM-yyyy'}}</td>
+                <td>{{item.describe}}</td>
+                <td>{{item.category.name}}</td>
+                <td>
+                    <div class="btn-group btn-group-xs">
+                        <button ng-click="edit(item)" class="btn btn-warning glyphicon glyphicon-edit"></button>
+                        <button ng-click="delete(item)" class="btn btn-warning glyphicon glyphicon-trash"></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Input ẩn chứa giá trị id -->
+    <input type="hidden" ng-model="form.productId">
+    <div>
+        <p>Selected Product ID: {{form.productId}}</p>
+    </div>
 </div>

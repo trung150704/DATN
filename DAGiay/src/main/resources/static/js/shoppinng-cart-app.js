@@ -161,41 +161,45 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 		        }
 		    },
 	};
-
-	// Load cart when controller is initialized
 	$scope.cart.loadFromLocalStorage();
 	$scope.cart.loadFavoritesFromLocalStorage();
+	
+	$scope.completeOrder = function() {
+	    const orderDetails = $scope.cart.items.map(item => ({
+	        product: { id: item.id },
+	        size: item.size,
+	        quantity: item.qty,
+	        price: item.price,
+	        productName: item.productName
+	    }));
 
-	// Order object
-	$scope.order = {
-		createDate: new Date(),
-		address: "",
-		account: { username: $("#username").text() }, // Assumes username is available in the DOM
-
-		// Generate order details from cart items
-		get orderDetails() {
-			return $scope.cart.items.map(item => {
-				return {
-					product: { id: item.id },
-					price: item.price,
-					quantity: item.qty
-				};
-			});
-		},
-
-		// Handle purchase action
-		purchase() {
-			let order = angular.copy(this);
-			$http.post("/rest/orders", order).then(resp => {
-				alert("Đặt hàng thành công");
-				$scope.cart.clear();
-				location.href = "/order/detail/" + resp.data.id;
-			}).catch(error => {
-				alert("Đặt hàng lỗi!");
-				console.error("Order failed:", error);
-			});
-		}
+	    const orderId = $scope.orderId;  // Ensure orderId is set from current order context
+	    $http.post(`/rest/orders/${orderId}/details`, orderDetails)
+	    .then(function(response) {
+	        console.log("Order details saved successfully");
+	        $scope.cart.clear(); // Clear cart after successful order placement
+	    })
+	    .catch(function(error) {
+	        console.error("Error saving order details", error);
+	    });
 	};
+
+
 });
+			function handlePaymentMethodChange(radio) {
+	            const qrPaymentId = '2';
+	            const paymentForm = document.getElementById('paymentForm');
+
+	            if (radio.value === qrPaymentId) {
+	                paymentForm.action = "/order/qrcode";
+	            } else {
+	                paymentForm.action = "/order/success";
+					const cart = 	angular.element(document.getElementById('paymentForm')).scope().cart;
+					cart.clear(); // Gọi phương thức xóa giỏ hàng từ AngularJS Controller
+					cart.saveToLocalStorage();
+	            }
+	        }
+
+
 
 

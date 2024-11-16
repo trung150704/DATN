@@ -104,7 +104,7 @@
     
         <a class="dropdown-item" style="font-size: 15px;" th:href="@{/up}">Thông tin cá nhân</a>
               <a class="dropdown-item" style="font-size: 15px;" th:href="@{/repass}">Đổi mật khẩu </a>
-            <a class="dropdown-item" style="font-size: 15px;" th:href="@{/order/list}">Tất cả hóa đơn</a>
+            <a class="dropdown-item" style="font-size: 15px;" th:href="@{/your_orders}">Tất cả hóa đơn</a>
             <a th:if="${#request.isUserInRole('ADMIN')}"
                th:href="@{/admin/home/index}" class="dropdown-item" style="font-size: 15px;">Administration</a>
             <div class="dropdown-divider"></div>

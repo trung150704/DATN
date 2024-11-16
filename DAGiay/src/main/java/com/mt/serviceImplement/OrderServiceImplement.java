@@ -11,8 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mt.entity.Order;
 import com.mt.entity.OrderDetail;
-import com.mt.repository.OrderDetailDAO;
-
+import com.mt.repository.OrderDetailRepository;
 import com.mt.repository.OrderRepository;
 import com.mt.service.OrderService;
 
@@ -21,7 +20,7 @@ public class OrderServiceImplement implements OrderService {
     @Autowired
     OrderRepository orderRepository;
     @Autowired
-    OrderDetailDAO orderDetailRepository;
+    OrderDetailRepository orderDetailRepository;
 
     @Override
     public Order create(JsonNode orderData) {
@@ -70,4 +69,13 @@ public class OrderServiceImplement implements OrderService {
 	    return orderRepository.save(order);
 	}
 
+	@Override
+	public Order findById(Integer id) {
+		return orderRepository.findById(id).orElse(null);
+	}
+
+	@Override
+    public List<OrderDetail> getOrderDetailsByOrderId(Integer orderId) {
+        return orderDetailRepository.findByOrderId(orderId);
+    }
 }

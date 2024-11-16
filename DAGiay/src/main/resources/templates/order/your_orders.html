@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body >
+<main>
+    <div class="container mt-5">
+        <h2  class="text-center h2">Your Orders</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Ngày tạo</th>
+                        <th>Họ Tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Trạng thái</th>
+                        <th>Địa chỉ</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${#dates.format(order.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${order.hoten}"></td>
+                        <td th:text="${order.sdt}"></td>
+                        <td th:text="${order.email}"></td>
+                        <td th:text="${order.status == 1 ? 'Đã hoàn thành' : (order.status == 0 ? 'Chờ xử lý' : 'Trạng thái khác')}"></td>
+                        <td th:text="${order.address}"></td>
+                        <td th:text="${order.totalamount}+'00 VNĐ'"></td>
+                        <td>
+                            <a th:href="@{/your_orders/{orderId}(orderId=${order.id})}">Xem chi tiết</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </main>
+    </body>
+</html>

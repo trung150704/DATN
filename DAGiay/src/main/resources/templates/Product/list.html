@@ -102,7 +102,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
                                <a th:href="@{|/product/detail/${p.id}|}"> <img th:src="@{/Images/{images}(images=${p.images})}" alt="Vintas Public 2000s - Low Top"></a>
                                 <div class="product-title" th:utext=${p.name}></div>
                                 <div class="product-price"><span  th:text="${p.price}+'00 VNĐ'"></span></div>
-                                <button class="btn-buy" th:href="@{|/product/detail/${p.id}|}">MUA NGAY</button>
+                               	<a th:href="@{|/product/detail/${p.id}|}"><button class="btn-buy" >MUA NGAY</button></a> 
                                 <span class="heart-btn" id="heartButton"><i class="far fa-heart"></i></span>
                             </div>
                         </div>

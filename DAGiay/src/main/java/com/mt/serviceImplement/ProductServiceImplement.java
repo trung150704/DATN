@@ -8,7 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mt.entity.Product;
+import com.mt.entity.SizeProduct;
+import com.mt.entity.SizeProductKey;
 import com.mt.repository.ProductRepository;
+import com.mt.repository.SizeProductRepository;
 import com.mt.service.ProductService;
 
 @Service
@@ -17,6 +20,9 @@ public class ProductServiceImplement implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    SizeProductRepository sizeProductRepository;
+    
     @Override
     public List<Product> findAll() {
         return productRepository.findAll(); // Lấy tất cả sản phẩm
@@ -83,5 +89,15 @@ public class ProductServiceImplement implements ProductService {
 		 return productRepository.findByDescribeContainingIgnoreCase(query);
 	}
 
-	
+	@Override
+	public Integer getAvailableQuantity(Integer productId, String sizeId) {
+	    SizeProductKey key = new SizeProductKey();
+	    key.setProductId(productId);
+	    key.setSizeId(sizeId);
+
+	    return sizeProductRepository.findById(key)
+	                                .map(SizeProduct::getCount)
+	                                .orElse(0);
+	}
+
 }

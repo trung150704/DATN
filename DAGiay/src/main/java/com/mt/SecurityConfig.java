@@ -95,7 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
         .antMatchers("/change-password").permitAll()
         .antMatchers("/", "/register").permitAll()
-            .antMatchers("/order/**").hasAnyRole("USER", "ADMIN")  // Chỉ người dùng có vai trò USER hoặc ADMIN mới truy cập được /order/**
+            //.antMatchers("/order/**").hasAnyRole("USER", "ADMIN")  // Chỉ người dùng có vai trò USER hoặc ADMIN mới truy cập được /order/**
             .antMatchers("/admin/**").hasRole("ADMIN")  // Chỉ người dùng có vai trò ADMIN mới truy cập được /admin/**
             .antMatchers("/rest/authorities").hasRole("ADMIN")  // Chỉ người dùng có vai trò ADMIN mới truy cập được /rest/authorities
             

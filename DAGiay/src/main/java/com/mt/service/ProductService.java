@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.mt.entity.Product;
+import com.mt.entity.SizeProduct;
 
 public interface ProductService {
 
@@ -34,10 +35,5 @@ public interface ProductService {
     
 	List<Product> findByDescribe(String query);
 
-	
-
-
-
-	
-   
+	Integer getAvailableQuantity(Integer productId,String sizeId);
 }

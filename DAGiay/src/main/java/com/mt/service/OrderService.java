@@ -13,4 +13,7 @@ public interface OrderService {
     void createOrder(Order order, List<OrderDetail> orderDetails);
     List<Order> findAll();
 	Order save(Order order);
+	Order findById(Integer id);
+	
+	List<OrderDetail> getOrderDetailsByOrderId(Integer orderId);
 }

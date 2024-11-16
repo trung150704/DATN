@@ -7,9 +7,12 @@ import org.springframework.data.repository.query.Param;
 import com.mt.entity.Order;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Query("SELECT o FROM Order o WHERE o.account.username = :username")
     List<Order> findByUsername(@Param("username") String username);
+
+	Optional<Order> findById(Integer id);
 }

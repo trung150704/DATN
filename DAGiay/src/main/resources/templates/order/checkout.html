@@ -5,7 +5,7 @@
     <br>
     <div class="container mt-4"></div>
     <hr>
-    <form id="paymentForm" th:action="@{/order/success}" method="post" onsubmit="return validateForm(); updateTotalAmount();">
+    <form id="paymentForm" th:action="@{/order/success}" method="post" onsubmit="return validateForm(); updateTotalAmount();" ng-submit="cart.clear()">
         <div class="row">
             <div class="col-md-8">
                 <div class="p-2" style="background-color: #e9ecef;">
@@ -96,24 +96,12 @@
 						<p><strong>TỔNG CỘNG:</strong> <span class="float-end fw-bold"  id="totalAmount" style="color: orange;">{{ cart.amount | number:3 }} VNĐ</span></p>						
 						<input type="hidden" id="totalAmountInput" name="totalAmount" value="0">
                     </div>
-                    <button  class="btn btn-warning w-100 mt-3 fw-bold text-light p-4 fs-4" type="submit" style="background: #f60;">HOÀN TẤT ĐẶT HÀNG</button>
+                    <button ng-click="completeOrder()" class="btn btn-warning w-100 mt-3 fw-bold text-light p-4 fs-4" type="submit" style="background: #f60;">HOÀN TẤT ĐẶT HÀNG</button>
                 </div>
             </div>
         </div>
     </form>
     <br>
-    <script>
-        function handlePaymentMethodChange(radio) {
-            const qrPaymentId = '2';
-            const paymentForm = document.getElementById('paymentForm');
-
-            if (radio.value === qrPaymentId) {
-                paymentForm.action = "/order/qrcode";
-            } else {
-                paymentForm.action = "/order/success";
-            }
-        }
-    </script>
     <script src="/js/validation.js"></script>
 </main>
 </body>
